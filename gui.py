@@ -1,3 +1,3 @@
 import pygame
 import time
-#from solver import solve, valid 
+from solve import solve, valid_pos
