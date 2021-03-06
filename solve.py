@@ -10,19 +10,38 @@ board = [
         [0, 4, 9, 2, 0, 6, 0, 0, 7]
     ]
 
+def solve(bo):
+    find = find_empty(bo)
+    if not find:
+        return True
+    else:
+        row,col = find
+        pos = (row,col)
 
+    for i in range(1,10):
+        if valid_pos(bo , i, pos):
+            bo[row][col]=i
+
+            if solve(bo):
+                return True
+
+            bo[row][col] = 0
+
+    return False
+
+    
 
 def valid_pos(bo, num, pos):
     
     #row
-    for i in range(bo[0]):                     # i is of for loop not pos(i,j)
-        if b[pos[0]][i] == num and pos[1]!=i:  #pos[1]!=1 do not bother checking already filled
+    for i in range(len(bo[0])):                     # i is of for loop not pos(i,j)
+        if bo[pos[0]][i] == num and pos[1]!=i:  #pos[1]!=1 do not bother checking already filled
             return False
 
     #column
 
     for i in range(len(bo)):
-        if b[i][pos[1]]==num and pos[0]!=i:
+        if bo[i][pos[1]]==num and pos[0]!=i:
             return False    
 
     #cube
@@ -66,4 +85,9 @@ def find_empty(bo):
             
     return None
 
-        
+print_board(board)
+solve(board)
+print("-"*20)
+print("|"*20)
+print("-"*20)
+print_board(board)
